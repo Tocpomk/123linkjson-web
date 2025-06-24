@@ -130,8 +130,7 @@ const EventBinder = {
             UIManager.showModal('删除选中文件', `确定要删除选中的 ${selected.length} 个文件吗？`, () => {
                 const paths = Array.from(selected).map(cb => cb.dataset.path).filter(Boolean);
                 FileManager.deleteSelectedFiles(paths);
-                FileManager.updateFileTableUI();
-                FileManager.updateFileListUI();
+                // 删除方法内部已经调用了更新UI的方法，这里不需要重复调用
             });
         });
         
@@ -239,7 +238,7 @@ const EventBinder = {
                 console.log('[EventBinder] delete button clicked, index:', index);
                 UIManager.showModal('删除文件', `确定要删除文件 "${FileManager.files[index].name}" 吗？此操作不可恢复。`, () => {
                     console.log('[EventBinder] delete confirm, index:', index);
-                    FileManager.deleteFile(FileManager.files[index].name);
+                    FileManager.deleteFile(index);
                 });
             } else if (action === 'copy') {
                 const file = FileManager.files[index];
