@@ -1,0 +1,400 @@
+/* 响应式设计 */
+
+/* 大屏幕 (1200px 及以上) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1600px;
+    }
+    
+    .main-content {
+        grid-template-columns: 350px 1fr;
+    }
+}
+
+/* 中等屏幕 (768px - 1199px) */
+@media (max-width: 1199px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .header h1 {
+        font-size: 1.6rem;
+    }
+    
+    .main-content {
+        grid-template-columns: 280px 1fr;
+        gap: 15px;
+    }
+    
+    .left-panel {
+        padding: 15px;
+    }
+    
+    .link-input-section,
+    .file-info-section,
+    .link-generation-section {
+        padding: 15px;
+    }
+}
+
+/* 平板 (768px - 1023px) */
+@media (max-width: 1023px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .left-panel {
+        order: 2;
+    }
+    
+    .right-panel {
+        order: 1;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .header-actions {
+        justify-content: center;
+    }
+    
+    .file-actions {
+        justify-content: center;
+    }
+    
+    .table-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .search-box {
+        max-width: none;
+    }
+    
+    .table-actions {
+        justify-content: center;
+    }
+    
+    .pagination-container {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .pagination-controls {
+        justify-content: center;
+    }
+    
+    .generation-options {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+}
+
+/* 手机 (480px - 767px) */
+@media (max-width: 767px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .header {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .header h1 {
+        font-size: 1.4rem;
+    }
+    
+    .header h1 i {
+        margin-right: 8px;
+    }
+    
+    .left-panel,
+    .link-input-section,
+    .file-info-section,
+    .link-generation-section {
+        padding: 15px;
+        border-radius: 10px;
+    }
+    
+    .panel-header h3,
+    .section-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .file-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .file-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .link-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .link-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .table-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .table-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .file-table th,
+    .file-table td {
+        padding: 8px;
+        font-size: 13px;
+    }
+    
+    .file-table th:nth-child(3),
+    .file-table td:nth-child(3) {
+        display: none;
+    }
+    
+    .file-table th:nth-child(4),
+    .file-table td:nth-child(4) {
+        display: none;
+    }
+    
+    .pagination-controls {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .pagination-controls .btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    .page-info {
+        font-size: 12px;
+    }
+    
+    .page-info input {
+        width: 40px;
+        padding: 4px;
+    }
+    
+    #pageSizeSelect {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 15px;
+    }
+    
+    .notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
+
+/* 小手机 (320px - 479px) */
+@media (max-width: 479px) {
+    .container {
+        padding: 5px;
+    }
+    
+    .header {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .header h1 {
+        font-size: 1.2rem;
+    }
+    
+    .left-panel,
+    .link-input-section,
+    .file-info-section,
+    .link-generation-section {
+        padding: 10px;
+    }
+    
+    .panel-header h3,
+    .section-header h3 {
+        font-size: 1rem;
+    }
+    
+    .file-item {
+        padding: 8px;
+    }
+    
+    .file-item-name {
+        font-size: 13px;
+    }
+    
+    .file-item-info {
+        font-size: 11px;
+    }
+    
+    .file-item-actions .btn {
+        padding: 3px 6px;
+        font-size: 10px;
+    }
+    
+    #linkInput {
+        min-height: 100px;
+        font-size: 12px;
+    }
+    
+    .file-table th,
+    .file-table td {
+        padding: 6px;
+        font-size: 12px;
+    }
+    
+    .file-table th:nth-child(2),
+    .file-table td:nth-child(2) {
+        max-width: 120px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    .btn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+    
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+    
+    .modal-content {
+        margin: 5% auto;
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 10px;
+    }
+    
+    .modal-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 8px;
+        font-size: 13px;
+    }
+}
+
+/* 横屏手机优化 */
+@media (max-width: 767px) and (orientation: landscape) {
+    .header {
+        padding: 10px 15px;
+    }
+    
+    .header h1 {
+        font-size: 1.3rem;
+    }
+    
+    .main-content {
+        grid-template-columns: 250px 1fr;
+        gap: 10px;
+    }
+    
+    .left-panel {
+        order: 1;
+    }
+    
+    .right-panel {
+        order: 2;
+    }
+    
+    .file-list {
+        max-height: 200px;
+    }
+}
+
+/* 高分辨率屏幕优化 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .btn,
+    .file-item,
+    .modal-content {
+        border-radius: 8px;
+    }
+    
+    .header,
+    .left-panel,
+    .link-input-section,
+    .file-info-section,
+    .link-generation-section {
+        border-radius: 12px;
+    }
+}
+
+/* 打印样式 */
+@media print {
+    .header-actions,
+    .file-actions,
+    .link-actions,
+    .table-actions,
+    .pagination-controls,
+    .generation-options,
+    .modal,
+    .notification {
+        display: none !important;
+    }
+    
+    .container {
+        max-width: none;
+        padding: 0;
+    }
+    
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .left-panel,
+    .link-input-section,
+    .file-info-section,
+    .link-generation-section {
+        background: white;
+        box-shadow: none;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+    }
+    
+    .file-table {
+        border: 1px solid #ccc;
+    }
+    
+    .file-table th,
+    .file-table td {
+        border: 1px solid #ccc;
+    }
+} 
