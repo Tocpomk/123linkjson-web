@@ -46,28 +46,7 @@ web123linkjson/
 ```
 
 ## 使用方法
-
-### 1. 直接打开
-直接在浏览器中打开 `index.html` 文件即可使用。
-
-### 2. 本地服务器（推荐）
-```bash
-# 进入项目目录
-cd web123linkjson
-
-# 启动本地服务器
-python server.py
-
-# 在浏览器中访问
-# http://localhost:8000
-```
-
-### 3. 其他服务器
-可以使用任何静态文件服务器，如：
-- Node.js: `npx serve .`
-- Python: `python -m http.server 8000`
-- PHP: `php -S localhost:8000`
-
+需要http环境支持才能完全使用
 ## 操作指南
 
 ### 基本操作
