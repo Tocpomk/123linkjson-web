@@ -66,7 +66,7 @@ const UIManager = {
             const actualIndex = startIndex + i;
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td><input type="checkbox" data-index="${actualIndex}"></td>
+                <td><input type="checkbox" data-index="${actualIndex}" data-path="${file.path}"></td>
                 <td>${file.path ? this.getFileName(file.path) : ''}</td>
                 <td>${this.formatFileSize(file.size)}</td>
                 <td>${file.path || '/'}</td>
@@ -179,4 +179,4 @@ const UIManager = {
     }
 };
 
-export default UIManager; 
+export default UIManager;

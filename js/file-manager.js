@@ -243,8 +243,9 @@ const FileManager = {
         this.saveFiles();
         this.currentPage = 1;
         this.updateFileTableUI();
+        this.updateFileListUI();
         UIManager.showNotification(`已删除 ${paths.length} 个文件`, 'success');
     },
 };
 
-export default FileManager; 
+export default FileManager;

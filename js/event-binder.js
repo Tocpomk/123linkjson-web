@@ -128,9 +128,10 @@ const EventBinder = {
                 return;
             }
             UIManager.showModal('删除选中文件', `确定要删除选中的 ${selected.length} 个文件吗？`, () => {
-                const indices = Array.from(selected).map(cb => parseInt(cb.dataset.index)).sort((a, b) => b - a);
-                const paths = indices.map(idx => FileManager.filteredFiles[idx].path);
+                const paths = Array.from(selected).map(cb => cb.dataset.path).filter(Boolean);
                 FileManager.deleteSelectedFiles(paths);
+                FileManager.updateFileTableUI();
+                FileManager.updateFileListUI();
             });
         });
         
@@ -284,4 +285,4 @@ const EventBinder = {
     }
 };
 
-export default EventBinder; 
+export default EventBinder;
