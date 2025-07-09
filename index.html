@@ -3,251 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>123云盘秒链JSON管理器-测试bug版</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>JSON秒传链接工具</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
 </head>
 <body>
     <div class="container">
-        <!-- 头部 -->
-        <header class="header">
-            <div class="header-content">
-                <h1><i class="fas fa-cloud"></i> 123云盘秒链JSON管理器</h1>
+        <h1>JSON秒传链接工具</h1>
+        
+        <div class="app-layout">
+            <!-- 侧边栏 - JSON文件列表 -->
+            <div class="sidebar">
+                <h2>JSON文件</h2>
+                <div class="button-group" style="flex-direction:column;align-items:flex-start;gap:6px;">
+                    <div style="display:flex;gap:8px;">
+                        <button id="remove-json-btn" disabled>移除选中</button>
+                        <button id="add-json-btn">添加JSON</button>
+                    </div>
+                </div>
+                <div id="drop-area" class="drop-area">
+                    <p>拖放JSON文件到这里</p>
+                </div>
+                <div style="margin: 10px 0 2px 0;">
+                    <span id="select-all-files" class="iconfont icon-gouxuankuang" style="margin-right:8px;vertical-align:middle;cursor:pointer;font-size:18px;"></span><span id="select-all-files-label">全选</span>
+                </div>
+                <ul id="json-file-list" class="file-list">
+                    <!-- 文件列表将通过JavaScript动态生成 -->
+                </ul>
             </div>
-        </header>
-
-        <!-- 主要内容区域 -->
-        <main class="main-content">
-            <!-- 左侧面板 -->
-            <div class="left-panel">
-                <div class="panel-header">
-                    <h3><i class="fas fa-file-alt"></i> 文件列表</h3>
-                    <button id="refreshFilesBtn" class="btn-icon" title="刷新">
-                        <i class="fas fa-sync-alt"></i>
-                    </button>
+            
+            <!-- 主内容区 -->
+            <div class="main-content">
+                <!-- 链接输入区 -->
+                <div class="link-input-section">
+                    <h2>秒传链接</h2>
+                    <div class="link-input-container">
+                        <textarea id="link-input" placeholder="在此粘贴秒传链接..."></textarea>
+                    </div>
+                    <div class="link-actions">
+                        <button id="paste-link-btn">粘贴秒链</button>
+                        <button id="clear-link-btn">清空秒链</button>
+                        <button id="parse-link-btn">解析链接</button>
+                        <button id="add-to-json-btn" disabled>添加到JSON</button>
+                    </div>
                 </div>
                 
-                <!-- 文件操作按钮 -->
-                <div class="file-actions">
-                    <button id="mergeFileBtn" class="btn btn-outline btn-sm">
-                        <i class="fas fa-object-group"></i> 合并文件
-                    </button>
-                    <button id="addFileBtn" class="btn btn-outline btn-sm">
-                        <i class="fas fa-plus"></i> 添加文件
-                    </button>
-                    <input type="file" id="fileInput" accept=".json" style="display: none;">
-                    <input type="file" id="addFileInput" accept=".json" multiple style="display: none;">
-                    <input type="file" id="mergeFileInput" accept=".json" multiple style="display: none;">
-                </div>
-
-                <!-- 拖拽提示 -->
-                <div class="drag-hint">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <p>拖拽JSON文件到这里</p>
-                </div>
-
-                <div class="file-list" id="fileList">
-                    <div class="empty-state">
-                        <i class="fas fa-folder-open"></i>
-                        <p>暂无文件</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 右侧内容区域 -->
-            <div class="right-panel">
-                <!-- 链接输入区域 -->
-                <div class="link-input-section">
-                    <div class="section-header">
-                        <h3><i class="fas fa-link"></i> 添加链接</h3>
-                    </div>
-                    <div class="link-input-container">
-                        <textarea id="linkInput" placeholder="请输入123云盘秒链（支持123FSLink和123FLCPV2格式）&#10;可以一次输入多个链接，每行一个"></textarea>
-                        <div class="link-actions">
-                            <button id="pasteLinkBtn" class="btn btn-outline">
-                                <i class="fas fa-paste"></i> 粘贴链接
-                            </button>
-                            <button id="parseLinkBtn" class="btn btn-primary">
-                                <i class="fas fa-magic"></i> 查看秒链
-                            </button>
-                            <button id="batchAddBtn" class="btn btn-secondary">
-                                <i class="fas fa-plus-circle"></i> 添加秒链
-                            </button>
-                            <button id="clearLinkBtn" class="btn btn-outline">
-                                <i class="fas fa-trash"></i> 清空
-                            </button>
+                <!-- 链接表格区 -->
+                <div class="link-table-section">
+                    <div class="table-header">
+                        <h2>链接列表</h2>
+                        <div class="table-actions">
+                            <button id="sort-links-btn">秒链排序</button>
+                            <button id="export-selected-btn" disabled>导出选中</button>
+                            <button id="export-all-btn" disabled>导出全部</button>
+                            <button id="delete-all-links-btn">删除选中</button>
                         </div>
                     </div>
+                    
+                    <table id="link-table" class="link-table">
+                        <thead>
+                            <tr>
+                                <th><span id="select-all" class="iconfont icon-gouxuankuang" style="cursor:pointer;font-size:18px;"></span></th>
+                                <th>文件名</th>
+                                <th>大小</th>
+                                <th>链接</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 链接列表将通过JavaScript动态生成 -->
+                        </tbody>
+                    </table>
                 </div>
-
-                <!-- 文件信息显示区域 -->
-                <div class="file-info-section">
-                    <div class="section-header">
-                        <h3><i class="fas fa-list"></i> 文件信息</h3>
-                        <div class="file-stats">
-                            <span id="fileCount">0 个文件</span>
-                            <span id="totalSize">总大小: 0 B</span>
-                        </div>
-                    </div>
-                    <div class="file-table-container">
-                        <div class="table-toolbar">
-                            <div class="search-box">
-                                <i class="fas fa-search"></i>
-                                <input type="text" id="searchInput" placeholder="搜索文件名...">
-                            </div>
-                            <div class="table-actions">
-                                <button id="sortBtn" class="btn btn-outline">
-                                    <i class="fas fa-sort"></i> 排序
-                                </button>
-                                <button id="exportBtn" class="btn btn-outline">
-                                    <i class="fas fa-download"></i> 导出
-                                </button>
-                                <button id="deleteSelectedBtn" class="btn btn-danger">
-                                    <i class="fas fa-trash"></i> 删除选中
-                                </button>
-                            </div>
-                        </div>
-                        <div class="file-table-wrapper">
-                            <table class="file-table" id="fileTable">
-                                <thead>
-                                    <tr>
-                                        <th><input type="checkbox" id="selectAll"></th>
-                                        <th>文件名</th>
-                                        <th>大小</th>
-                                        <th>路径</th>
-                                        <th>操作</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="fileTableBody">
-                                    <tr class="empty-row">
-                                        <td colspan="5">
-                                            <div class="empty-state">
-                                                <i class="fas fa-file"></i>
-                                                <p>暂无文件信息</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- 分页控件 -->
-                        <div class="pagination-container">
-                            <div class="pagination-info">
-                                <span id="paginationInfo">显示 0-0 条，共 0 条</span>
-                            </div>
-                            <div class="pagination-controls">
-                                <button id="firstPageBtn" class="btn btn-outline" disabled>
-                                    <i class="fas fa-angle-double-left"></i>
-                                </button>
-                                <button id="prevPageBtn" class="btn btn-outline" disabled>
-                                    <i class="fas fa-angle-left"></i>
-                                </button>
-                                <span class="page-info">
-                                    <input type="number" id="currentPageInput" min="1" value="1" style="width: 50px; text-align: center;">
-                                    <span>/ <span id="totalPages">1</span></span>
-                                </span>
-                                <button id="nextPageBtn" class="btn btn-outline" disabled>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                                <button id="lastPageBtn" class="btn btn-outline" disabled>
-                                    <i class="fas fa-angle-double-right"></i>
-                                </button>
-                                <select id="pageSizeSelect">
-                                    <option value="10">10条/页</option>
-                                    <option value="20" selected>20条/页</option>
-                                    <option value="50">50条/页</option>
-                                    <option value="100">100条/页</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 新增：解析秒链结果显示区域 -->
-                    <div id="parsedLinkResult" style="margin-top:12px;"></div>
-                </div>
-
-                <!-- 链接生成区域 -->
-                <div class="link-generation-section">
-                    <div class="section-header">
-                        <h3><i class="fas fa-share-alt"></i> 生成链接</h3>
-                    </div>
-                    <div class="link-generation-container">
-                        <div class="generation-options">
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="selectAllForLink">
-                                全选文件
-                            </label>
-                            <button id="generateLinkBtn" class="btn btn-primary">
-                                <i class="fas fa-link"></i> 生成秒链
-                            </button>
-                        </div>
-                        <div class="generated-link-container">
-                            <textarea id="generatedLink" placeholder="生成的链接将显示在这里" readonly></textarea>
-                            <div class="link-actions">
-                                <button id="copyLinkBtn" class="btn btn-secondary">
-                                    <i class="fas fa-copy"></i> 复制
-                                </button>
-                                <button id="clearGeneratedBtn" class="btn btn-outline">
-                                    <i class="fas fa-trash"></i> 清空
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- 重命名模态框 -->
-    <div id="renameModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>重命名文件</h3>
-                <button class="modal-close" id="renameModalClose">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="renameInput">新文件名:</label>
-                    <input type="text" id="renameInput" placeholder="请输入新文件名">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" id="renameConfirm">确定</button>
-                <button class="btn btn-outline" id="renameCancel">取消</button>
             </div>
         </div>
     </div>
 
-    <!-- 模态框 -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalTitle">提示</h3>
-                <button class="modal-close" id="modalClose">&times;</button>
-            </div>
-            <div class="modal-body" id="modalBody">
-                内容
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" id="modalConfirm">确定</button>
-                <button class="btn btn-outline" id="modalCancel">取消</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 通知 -->
-    <div id="notification" class="notification">
-        <div class="notification-content">
-            <i class="notification-icon"></i>
-            <span class="notification-message"></span>
-        </div>
-    </div>
-
-    <!-- JavaScript模块 -->
-    <script src="js/link-parser.js"></script>
-    <script src="js/json-data.js"></script>
-    <script src="js/ui-utils.js"></script>
-    <script type="module" src="js/app.js"></script>
+    <!-- JavaScript文件 -->
+    <script src="js/linkParser.js"></script>
+    <script src="js/jsonManager.js"></script>
+    <script src="js/uiUtils.js"></script>
+    <script src="js/eventHandlers.js"></script>
+    <script src="js/linkTableSort.js"></script>
+    <script src="js/uiHandler.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/linkTableEnhance.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    if(window.initLinkTableEnhance) window.initLinkTableEnhance();
+});
+</script>
 </body>
-</html> 
+</html>
